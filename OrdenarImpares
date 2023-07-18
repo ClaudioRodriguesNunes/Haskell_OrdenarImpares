@@ -1,0 +1,14 @@
+ordenarImpares :: [Int] -> [Int]
+ordenarImpares xs = bubbleSort (filter odd xs)
+bubbleSort :: Ord a => [a] -> [a]
+bubbleSort [] = []
+bubbleSort [x] = [x]
+bubbleSort xs = bubbleSort' xs (length xs)
+bubbleSort' :: Ord a => [a] -> Int -> [a]
+bubbleSort' xs 0 = xs
+bubbleSort' xs n = bubbleSort' (swapAdjacent xs) (n - 1)
+  where 
+    swapAdjacent (x1 : x2 : xs)
+      | x1 > x2 = x2 : swapAdjacent (x1 : xs)
+      | otherwise = x1 : swapAdjacent (x2 : xs)
+    swapAdjacent xs = xs
